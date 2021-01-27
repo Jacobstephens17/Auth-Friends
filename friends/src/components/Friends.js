@@ -1,6 +1,6 @@
 import React from 'react';
 import AddFriend from '../components/AddFriend'
-import axiosWithAuth from './../utils/axiosWithAuth';
+import { axiosWithAuth } from './../utils/axiosWithAuth';
 import RemoveFriend from '../components/RemoveFriend'
 
 class Friends extends React.Component {
@@ -16,17 +16,19 @@ class Friends extends React.Component {
     getFriendsData = () => {
         axiosWithAuth()
 
-        .get('/friends')
-
-        .then((req) => {
+        .get('http://localhost:5000/api/friends')
+        
+        .then((res) => {
+            console.log(res.data)
             this.setState({
-                friends:req.data
+                friends:res.data
             })
         })
-
+        
         .catch((err)=>{
             console.log(err.response.data.error)
         })
+      
     }
   
     addFriend = (friend) => {
@@ -39,25 +41,16 @@ class Friends extends React.Component {
             })
     }
 
-    removeFriend = (friendId) => {
-        axiosWithAuth()
-        .delete(`/friends/${friendId}`)
-        .then((req)=>{
-            this.setState({
-                friends:req.data
-            })
-        })
-
-    }
 
     
     render(){
         return(
             <div>
-                <AddFriend postFriend={this.postFriend}/>
 
                 <h1>Friends List</h1>
                
+                <AddFriend addFriend={this.addFriend}/>
+                <RemoveFriend/>
                 
             </div>
         )
