@@ -7,16 +7,14 @@ export class AddFriend extends React.Component {
     state= {
         id:'',
         name:'',
-        age:'',
         email:''
     }
 
     addNewFriend = () => {
         const newFriend = {
-            name: this.state.name, 
-            age: this.state.age,
-            email:this.state.email,
             id:this.state.id,
+            name: this.state.name, 
+            email:this.state.email,
         }
         this.addNewFriend(newFriend)
     }
@@ -25,7 +23,9 @@ export class AddFriend extends React.Component {
   handleChange = (e) => {
         this.setState({
             ...this.state,
-            [e.target.name]: e.target.value
+            [e.target.id]: e.target.id,
+            [e.target.name]: e.target.value,
+            [e.target.email]: e.target.email,
         })
     }
 
@@ -39,6 +39,14 @@ export class AddFriend extends React.Component {
                 <form onSubmit={this.addNewFriend}>
                     <input
                         type='text'
+                        name='id'
+                        placeholder='Id'
+                        value={this.state.id}
+                        onChange={this.handleChange}
+                    
+                    />
+                    <input
+                        type='text'
                         name='name'
                         placeholder='Name'
                         value={this.state.name}
@@ -46,14 +54,6 @@ export class AddFriend extends React.Component {
                     
                     />
 
-                    <input
-                        type='text'
-                        name='age'
-                        placeholder='Age'
-                        value={this.state.age}
-                        onChange={this.handleChange}
-                    
-                    />
                       <input
                         type='text'
                         name='email'

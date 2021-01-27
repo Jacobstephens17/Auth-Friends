@@ -36,7 +36,7 @@ const [ loggedIn, setLoggedIn ] = useState(false);
       <div>
             
         <Link onClick={logout}>Logout</Link>
-        {(localStorage.getItem('token') && <Link to="/friendslist">Friends List</Link>)}
+        {(localStorage.getItem('token') && <Link to="/friendslist">Protected Page</Link>)}
          
         <Switch>
           <PrivateRoute exact path="/friendslist" component={Friends} />

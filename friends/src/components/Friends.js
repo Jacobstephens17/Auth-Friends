@@ -19,10 +19,11 @@ class Friends extends React.Component {
         .get('http://localhost:5000/api/friends')
         
         .then((res) => {
-            console.log(res.data)
-            this.setState({
-                friends:res.data
-            })
+                // console.log(item)
+                this.setState({
+                    friends:[res.data]
+                })
+            console.log(this.state.friends)
         })
         
         .catch((err)=>{
@@ -42,16 +43,31 @@ class Friends extends React.Component {
     }
 
 
+    formatData = ( )=> {
+        const formattedData = [];
+        this.state.friends.forEach((id, name, email) =>{
+            formattedData.push({
+                id: this.id, 
+                name: this.name, 
+                email: this.email
+            })
+        })
+        return formattedData;
+    }
+
     
     render(){
+
         return(
             <div>
-
                 <h1>Friends List</h1>
-               
-                <AddFriend addFriend={this.addFriend}/>
+              
+                <AddFriend />
+
                 <RemoveFriend/>
                 
+                   
+               
             </div>
         )
     }
